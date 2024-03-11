@@ -11,6 +11,7 @@ From Azure blob storage, historical data was loaded to Azure Data Explorer for d
 The chatbot boasts dual processing capabilities:
 - **SQL Database Queries**: For general information requests, it dynamically generates SQL queries to retrieve data from an Azure SQL database, enabling users to interact with stored data using conversational language.
 - **Machine Learning Model Invocation**: For specific inquiries about travel times between locations in NYC, it calls an external ML model endpoint, leveraging advanced analytics to provide precise travel insights.
+- **Overcoming Limitations of Embeddings-Based Bots:**: Embeddings-based approaches, while powerful for capturing semantic meanings, often face challenges in handling specific, data-intensive queries or providing dynamic responses based on real-time data analysis.
 
 ## How It Works
 
@@ -36,14 +37,26 @@ Here's a step-by-step breakdown of the process:
 
 ![alt text](/diagrams/PGJR%20-%20Architecture%20-%20User%20Interface.png)
 
-### Overcoming Limitations of Embeddings-Based Bots
 
-Embeddings-based approaches, while powerful for capturing semantic meanings, often face challenges in handling specific, data-intensive queries or providing dynamic responses based on real-time data analysis. This project overcomes such limitations by:
+## Running Application - CLI
 
-- **Enhancing Contextual Understanding**: Leveraging advanced NLP capabilities to interpret the user's intent more accurately and decide the most effective processing path - be it a database query or a machine learning model invocation.
-- **Dynamic Data Handling**: Directly querying a SQL database allows for real-time data retrieval, ensuring responses are based on the latest information. This contrasts with embedding-based bots that might rely on static data or predefined responses.
-- **Specialized Responses through ML**: For queries that demand more than factual data retrieval—like estimating travel times—this chatbot smartly redirects to an ML model, harnessing its predictive power for responses that require computation or analysis beyond straightforward lookup.
+Install `requirements.txt` and initialize app in the terminal
 
+``` bash
+pip install -r requirements.txt
+
+streamlit run app/Bot_StreamLit.py
+```
+
+## Running Application - Docker
+
+Build docker image and run
+
+``` bash
+docker build --no-cache -t pgjr_ai_hackathon:v1 .
+
+docker run --rm -p 8880:8501 pgjr_ai_hackathon:v1
+```
 
 ## Running Streamlit
 
