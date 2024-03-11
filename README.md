@@ -59,5 +59,6 @@ docker run --rm -p 8880:8501 pgjr_ai_hackathon:v1
 ```
 
 ## Running Streamlit
-
-Run 'streamlit run Bot_StreamLit.py'
+```
+streamlit run bot_streamlit.py
+```
