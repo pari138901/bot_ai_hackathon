@@ -1,2 +1,2 @@
 ### Running Streamlit
-> Run 'streamlit run Bot_StreamLit.py'
+Run 'streamlit run Bot_StreamLit.py'
