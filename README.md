@@ -30,10 +30,6 @@ Here's a step-by-step breakdown of the process:
     - **SQL Database Queries**: If the AI determines the query pertains to general information, the generated SQL query is executed against the configured Azure SQL database. The database then returns the requested data, which is captured for response generation.
     - **Machine Learning Model Invocation**: If the query is identified as a travel time inquiry, the system invokes the specified machine learning model endpoint, passing the necessary parameters extracted from the query. The model processes the request and returns travel time estimates.
 
-4. **Generating a Conversational Response**: With the processed data in hand—whether from the SQL database or the ML model—the system uses OpenAI's GPT again to generate a conversational response. This response is designed to present the information or insights in an easily understandable and engaging manner, directly addressing the user's initial query.
-
-This dual-functionality framework ensures that users can access a wide range of information and insights through a single, conversational interface, making data exploration both intuitive and efficient.
-
 ## LLM Application
 
 ![alt text](/diagrams/PGJR%20-%20Architecture%20-%20User%20Interface.png)
