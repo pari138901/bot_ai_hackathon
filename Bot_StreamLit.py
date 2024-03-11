@@ -3,15 +3,8 @@ import os
 import pyodbc
 import streamlit as st
 from streamlit_chat import message
+from config import DATABASE_CONFIG, a_endpoint, a_key, a_version
 
-# Database connection parameters
-DATABASE_CONFIG = {
-    'server': 'pgjr-sqlserver.database.windows.net,1433',
-    'database': 'pgjr-sqldb',
-    'username': 'rtslabs',
-    'password': 'LhcW05#Z',
-    'driver': '{ODBC Driver 17 for SQL Server}',
-}
 
 # Initialize session state keys if they don't exist
 if 'generated' not in st.session_state:
@@ -39,12 +32,12 @@ def openai_completion(prompt, engine="gpt-35-turbo", temperature=0.0, max_tokens
     General function to interact with OpenAI's completion endpoint.
     """
     client = AzureOpenAI(
-    azure_endpoint = "https://pgjraistudio4875983533.openai.azure.com/", 
-    api_key="68e132221fc9497894d46acf3bc25bf1",  
-    api_version="2024-02-15-preview"
+    azure_endpoint = a_endpoint, 
+    api_key=a_key,  
+    api_version=a_version
     )
     response = client.chat.completions.create(
-        model="gpt-35-turbo", # model = "deployment_name"
+        model=engine, # model = "deployment_name"
         messages =prompt,
         temperature=temperature,
         max_tokens=max_tokens,
@@ -96,7 +89,7 @@ def execute_sql_query(sql_query):
         print(f"Database query failed: {e}")
         return None
 
-def generate_sys_msg():
+def generate_sql_sys_msg():
     schema_description = """
         The 'dbo.vw_trips' table contains trip data with the following columns:
         TripID (unique identifier), PickupDateTime (pickup timestamp), 
@@ -104,8 +97,9 @@ def generate_sys_msg():
           DropoffDateTime (dropoff timestamp), DropOffLocation_Zone (dropoff zone), 
           DropOffLocation_Borough (dropoff borough), TravelTime (duration), PassengerCount (number of passengers), 
           FareAmount (fare), FeeAmount (additional fees), TotalAmount (total charged).
-          Only aggregated data is shown to limit the data displayed in chat.Based on this schema, generate a SQL query to run on an Azure SQL db for the user prompt. 
-          If you have to use limit in the query, use top instead. You can use subquery when needed but donot use cte. Make sure to end the query with ';' and it follows the syntax for t-sql. Please response in this format: SQL_Query: sql_query;
+          Only aggregated data is shown to limit the data displayed in chat. Based on this schema, generate a SQL query to run on an Azure SQL db for the user prompt. 
+          If you have to use limit in the query, use top instead. You can use subquery when needed but donot use cte. 
+          Make sure to end the query with ';' and it follows the syntax for t-sql. Please response in this format: SQL_Query: sql_query;
     """
     add_to_chat('system', schema_description)
 
@@ -149,7 +143,7 @@ with st.container():
     submit_button = st.button("Submit")
 
 if submit_button and user_input:
-    generate_sys_msg()
+    generate_sql_sys_msg()
     main(user_input)
 
 # Displaying the chat history
