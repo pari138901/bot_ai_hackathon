@@ -1,0 +1,4 @@
+openai
+pyodbc
+streamlit
+streamlit_chat
