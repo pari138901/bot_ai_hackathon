@@ -2,7 +2,7 @@
 
 ## Data Architecture
 
-![alt text](diagrams/PGJR - Architecture - Data Processing.png)
+![alt text](/diagrams/PGJR%20-%20Architecture%20-%20Data%20Processing.png)
 
 ## Running Streamlit
 
