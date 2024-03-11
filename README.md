@@ -22,11 +22,9 @@ Here's a step-by-step breakdown of the process:
 2. **Query Interpretation with OpenAI's GPT**: Upon receiving a query, the system leverages OpenAI's GPT to interpret the user's intent. This step involves analyzing the query's content to determine whether it seeks general information stored in the database or requires travel time estimates between specific NYC locations.
 
     - For general information requests, the AI generates a SQL query tailored to retrieve the relevant data from the Azure SQL database.
-    **Example Prompts:**  
-    'Which are the 3 most busy Borough?', 'How many trips are there in the dataset?'
+    **Example Prompts:**  'Which are the 3 most busy Borough?', 'How many trips are there in the dataset?'
     - For travel time inquiries, the AI identifies the request as requiring a response from the external machine learning model.
-    **Example Prompts:** 
-    'How long will it take to travel from Chinatown to JFK'**
+    **Example Prompts:**  'How long will it take to travel from Chinatown to JFK'
 
 3. **Processing the Query**:
     - **SQL Database Queries**: If the AI determines the query pertains to general information, the generated SQL query is executed against the configured Azure SQL database. The database then returns the requested data, which is captured for response generation.
